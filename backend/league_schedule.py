@@ -29,10 +29,8 @@ class Schedule:
 
         """
         date = str(datetime.datetime.now())[:10]
-        # print(date)
-        # date = "2024-01-02"
         team_games = self.df[self.df["Home"] == team]
-        # print(list(team_games["GameDate"]))
+        counter = 0
         if date not in list(team_games["GameDate"]):
             date = str(datetime.datetime.now() + datetime.timedelta(days=1))[:10]
             counter = 2
@@ -44,21 +42,7 @@ class Schedule:
         else:
             team_games = team_games[team_games["DateIndex"] >= self.d[date]]
 
-        return list(team_games["DateIndex"])[:n]
-
-
-
-# df = pd.read_csv("2023_schedule.csv")
-
-# df_date = df.sort_values(by='GameDate')
-
-# l = sorted(list(set(df_date["GameDate"])))
-# d = {date: index for index, date in enumerate(l)}
-
-# for index, row in df_date.iterrows():
-#     row.GameDate = d[row.GameDate]
-
-# print(df_date)
-            
-s = Schedule()
-print(s.get_days_played("TOR", 5))
+        l = list(team_games["DateIndex"])[:n]
+        ans = map(lambda x: x-l[0]+counter, l)
+        ans = filter(lambda x: x <= n, ans)
+        return list(ans)
