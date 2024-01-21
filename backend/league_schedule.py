@@ -33,7 +33,7 @@ class Schedule:
         counter = 0
         if date not in list(team_games["GameDate"]):
             date = str(datetime.datetime.now() + datetime.timedelta(days=1))[:10]
-            counter = 2
+            counter = 1
             while date not in list(team_games["GameDate"]):
                 date = str(datetime.datetime.now() + counter*datetime.timedelta(days=1))[:10]
                 counter += 1
