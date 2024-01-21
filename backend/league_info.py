@@ -1,5 +1,4 @@
 from espn_api.basketball import League
-import helper
 
 class FBL:
     """
