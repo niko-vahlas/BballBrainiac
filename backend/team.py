@@ -37,7 +37,15 @@ class Team:
         Returns the number of points that team varitation will get if they get their average points
         Calculate ideal schedule
         """
-        return self.league.free_agents()
+        if (self.player_to_swap == None):
+            print("Error: player_to_swap is None\nProgram Stopped")
+            return
+        
+        s = Schedule()
+        # for each player calculates avg_points times number of games for their time
+        average_points = map(lambda x: len(s.get_days_played(x.proTeam, days)*x.avg_points, self.team))
+
+        return sum(average_points)
     
     def calculate_ideal_schedule_total_days(self) -> int:
         """
