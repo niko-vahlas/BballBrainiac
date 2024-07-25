@@ -1,6 +1,5 @@
 from typing import Dict, List
 from flask import Flask, request, jsonify
-from league_info import FBL
 from espn_api.basketball import League
 from scheduler import Scheduler
 
