@@ -6,9 +6,31 @@ function LoginForm() {
   const [YER, setYER] = useState('');
   const [SWD, setSWD] = useState('');
   const [ES2, setES2] = useState('');
+  const [responseData, setResponseData] = useState(null);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
+    try {
+      fetch('https://our.com Endpoint', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          LID: `${LID}`,
+          YER: `${YER}`,
+          SWD: `${SWD}`,
+          ES2: `${ES2}`,
+        }),
+      })
+        .then((response) => response.json())
+        .then();
+    } catch (error) {
+      console.log(error);
+    }
+
     alert(`Stats entered:\nLID: ${LID}\nYER: ${YER}\nSWD: ${SWD}\nES2: ${ES2}`);
   };
 
