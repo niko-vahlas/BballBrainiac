@@ -37,7 +37,6 @@ def process_data():
             "error": "Team name doesn't exist",
         }), 400
     current_free_agents = cur_league.free_agents()
-    print(current_free_agents)
     print("hit 40")
     #pass in free agents to a class along with all neccessary info
     schedule = Scheduler(current_team, days, current_free_agents)

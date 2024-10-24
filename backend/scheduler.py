@@ -26,18 +26,28 @@ class Scheduler:
         dates = generate_dates(self.days)
         points = 0
         for date in dates:
-            teams_playing = schedule_map[date]
-            players_playing = get_players_playing(date, players, teams_playing)
+            # Convert the date to match the JSON format
+            date_str = date.strftime('%m/%d/%Y 00:00:00')
+            teams_playing = schedule_map.get(date_str)
+            if teams_playing is None:
+                print(f"No schedule found for {date_str}")
+                continue
+            players_playing = get_players_playing(players, teams_playing)
             for player in players_playing:
-                points+=player.avg_points
-
+                points += player.avg_points
+                print(type(player.avg_points))
+        # print(players)
         return points
 
     def all_possible_teams(self) -> List[Dict[str, any]]:
-        """
-        Calculates all the different combinations of teams and single free agent swaps
-        """
-        possible_teams = [[]]
+        def player_to_dict(player: Player) -> Dict[str, any]:
+            return {
+            'name': player.name,
+            'team': player.proTeam,
+            'avg_points': player.avg_points,
+            # Add more fields as necessary
+    }
+        possible_teams = []
         current_team: List[Player] = self.team.roster
         current_free_agents: List[Player] = self.free_agents
 
@@ -47,12 +57,8 @@ class Scheduler:
                 new_team[i] = current_free_agents[j]
                 possible_teams.append({
                     'new_team_points': self.calculate_total_points_list(new_team),
-                    'swapped_in': current_free_agents[j],
-                    'swapped_out': current_team[i]
+                    'swapped_in': player_to_dict(current_free_agents[j]),  # Convert Player to dict
+                    'swapped_out': player_to_dict(current_team[i])         # Convert Player to dict
                 })
 
         return possible_teams
-    
-    
-        
-

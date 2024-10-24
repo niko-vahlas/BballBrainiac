@@ -12,7 +12,7 @@ def generate_dates(n):
 def get_players_playing(players: List[Player], teams_playing):
     """Schedule the players optimally and return those who are playing"""
     condition = lambda player: player.proTeam in teams_playing
-    cur_players: List[Player] = filter(players, condition)
+    cur_players: List[Player] = list(filter(condition, players))  # Fix here
     selected_players = []
     player_used = set()
 
@@ -42,14 +42,16 @@ def get_players_playing(players: List[Player], teams_playing):
     # Assign players to slots
     for team_slot in team_slots:
         eligibleSlots = slot_mapping[team_slot]
+        assigned = False
         for eligible_slot in eligibleSlots:
             candidates = slot_candidates.get(eligible_slot, [])
             for candidate in candidates:
                 if candidate.name not in player_used:
                     selected_players.append(candidate)
                     player_used.add(candidate.name)
+                    assigned = True
                     break
-            if any(player.name in player_used for player in selected_players):
-                break
+        if assigned:
+            break
 
     return selected_players
