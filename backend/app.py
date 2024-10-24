@@ -15,7 +15,7 @@ def process_data():
     #return the top 5 players with who to swap and how much of an inecrease that is
     null_fields = [key for key, value in data.items() if value is None]
     n = 5
-    team_name = 'Niko Team'
+    team_name = "niko's Nifty Team"
     days=10
 
     if null_fields:
@@ -37,6 +37,8 @@ def process_data():
             "error": "Team name doesn't exist",
         }), 400
     current_free_agents = cur_league.free_agents()
+    print(current_free_agents)
+    print("hit 40")
     #pass in free agents to a class along with all neccessary info
     schedule = Scheduler(current_team, days, current_free_agents)
     best_teams: List[Dict[str, any]] = sorted(schedule.all_possible_teams(), key=lambda x: x['new_team_points'], reverse=True)
