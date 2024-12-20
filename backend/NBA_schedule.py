@@ -16,9 +16,9 @@ if response.status_code == 200:
         
         teams_playing = []
         for game in games:
-            home_team = game['homeTeam']['teamName']
-            away_team = game['awayTeam']['teamName']
-            teams_playing.append(f"{away_team} vs {home_team}")
+            home_team = game['homeTeam']['teamTricode']
+            away_team = game['awayTeam']['teamTricode']
+            teams_playing.append(f"{away_team},{home_team}")
         
         schedule_map[date] = teams_playing
     with open('nba_schedule_2024.json', 'w') as json_file:

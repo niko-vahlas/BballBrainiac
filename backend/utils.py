@@ -51,7 +51,5 @@ def get_players_playing(players: List[Player], teams_playing):
                     player_used.add(candidate.name)
                     assigned = True
                     break
-        if assigned:
-            break
 
     return selected_players

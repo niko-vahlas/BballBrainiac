@@ -1,0 +1,16 @@
+{
+  "name": "bballbrainiac",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/niko-vahlas/BballBrainiac.git",
+  "author": "Nikolas Vahlas <nikolasvahlas@nikolasvahlas.com>",
+  "scripts": {
+    "start": "concurrently \"yarn start:frontend\" \"yarn start:backend\"",
+    "start:frontend": "cd frontend && yarn start",
+    "start:backend": "cd backend && python3 app.py"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
